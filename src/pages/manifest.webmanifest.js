@@ -23,7 +23,7 @@ export async function GET() {
         start_url: '/',
         display: 'browser',
         background_color: '#f6f6f6',
-        theme_color: '#8e9867',
+        theme_color: '#8bc287',
     };
 
     return new Response(JSON.stringify(manifest), {
