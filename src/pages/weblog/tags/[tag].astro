@@ -1,0 +1,47 @@
+---
+// src/pages/weblog/tags/[tag].astro
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import '@/assets/styles/weblog.css';
+
+export async function getStaticPaths() {
+    const allBlog = await getCollection('blog');
+    const uniqueTags = [...new Set(allBlog.flatMap((p) => p.data.tags))];
+    return uniqueTags.map((tag) => ({ params: { tag } }));
+}
+
+const { tag } = Astro.params;
+
+const allBlog = await getCollection('blog');
+const filteredPosts = allBlog
+    .filter((post) => post.data.tags.includes(tag))
+    .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const postsByMonth = Object.groupBy(filteredPosts, (post) =>
+    new Intl.DateTimeFormat('en-GB', { month: 'short', year: 'numeric' }).format(
+        post.data.pubDate,
+    ),
+);
+---
+
+<BaseLayout pageTitle={`#${tag}`}>
+    {
+        Object.entries(postsByMonth).map(([monthYear, posts]) => (
+            <section class="blog-month-group">
+                <h2 class="blog-heading">{monthYear}</h2>
+                <ul class="blog-list">
+                    {(posts ?? []).map((post) => (
+                        <li class="blog-title">
+                            <h3>
+                                <a class="prose-link" href={`/weblog/${post.id}`}>
+                                    {post.data.title}
+                                </a>
+                            </h3>
+                            <p class="desc">{post.data.description}</p>
+                        </li>
+                    ))}
+                </ul>
+            </section>
+        ))
+    }
+</BaseLayout>

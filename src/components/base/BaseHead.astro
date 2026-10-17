@@ -1,0 +1,116 @@
+---
+// BaseHead.astro
+import { ClientRouter } from 'astro:transitions';
+import '@/assets/styles/global.css';
+
+export interface Props {
+    title: string;
+    description?: string;
+    image?: string;
+}
+
+const { title, description, image } = Astro.props;
+
+const ogImage = image ? new URL(image, Astro.site) : new URL('/social-default.png', Astro.site);
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!-- 
+
+
+        ∵*.•´¸.•*´✶´♡
+        ° ☆ °˛*˛☆_Π______*˚☆*
+        ˚ ˛★˛•˚*/______/ ~⧹。˚˚
+        ˚ ˛•˛•˚ ｜ 田田 ｜門｜ ˚*
+                =╬╬=╬╬=╬╬=╬╬=
+
+    Welcome to my place on the internet.
+    I hope you don't mind the mess, I'm trying my hardest.
+
+    ¯\_(ツ)_/¯
+
+
+ -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+
+<title>Xhor.haus{title ? ` | ${title}` : ''}</title>
+
+<link rel="preload" href="/assets/fonts/thinker.woff2" as="font" type="font/woff2" crossorigin />
+
+<script is:inline>
+    (() => {
+        const root = document.documentElement;
+        const storageKey = 'theme-mode';
+        const mql = window.matchMedia('(prefers-color-scheme: dark)');
+
+        const getTheme = () =>
+            localStorage.getItem(storageKey) || (mql.matches ? 'dark' : 'light');
+
+        const applyToRoot = (target, theme) => {
+            target.setAttribute('data-theme', theme);
+            target.style.colorScheme = theme;
+            target.dataset.ready = 'true';
+        };
+
+        const syncButtons = () => {
+            const isDark = root.getAttribute('data-theme') === 'dark';
+            document.querySelectorAll('.theme-toggle').forEach((btn) => {
+                btn.ariaPressed = String(isDark);
+            });
+        };
+
+        const switchTheme = (theme) => {
+            root.classList.add('no-transition');
+            applyToRoot(root, theme);
+            syncButtons();
+            setTimeout(() => root.classList.remove('no-transition'), 50);
+        };
+
+        // apply on first load, before the page paints
+        applyToRoot(root, getTheme());
+
+        // apply to the incoming page on every navigation
+        document.addEventListener('astro:before-swap', (event) => {
+            applyToRoot(event.newDocument.documentElement, getTheme());
+        });
+
+        // refresh the buttons aria-pressed after every navigation
+        document.addEventListener('astro:page-load', syncButtons);
+
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('.theme-toggle')) return;
+            const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            switchTheme(next);
+            localStorage.setItem(storageKey, next);
+        });
+
+        mql.addEventListener('change', (e) => {
+            const systemTheme = e.matches ? 'dark' : 'light';
+            switchTheme(systemTheme);
+            localStorage.setItem(storageKey, systemTheme);
+        });
+    })();
+</script>
+
+<ClientRouter />
+
+<link rel="icon" href="/favicon.ico" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/manifest.webmanifest" />
+
+<link rel="canonical" href={canonicalURL} />
+
+<meta name="generator" content={Astro.generator} />
+<meta name="color-scheme" content="dark light" />
+
+<link rel="alternate" type="application/rss+xml" title="Xhor.haus RSS Feed" href="/rss.xml" />
+
+{description && <meta name="description" content={description} />}
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={title} />
+{description && <meta property="og:description" content={description} />}
+<meta property="og:image" content={ogImage} />

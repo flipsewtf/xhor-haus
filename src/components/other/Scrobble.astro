@@ -1,0 +1,51 @@
+---
+//ScrobbleBox.astro
+import { IconHeadphones } from '@tabler/icons-astro';
+
+interface Props {
+    class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<div class:list={['listened', className]}>
+    <IconHeadphones aria-hidden="true" />
+    <a
+        class="track"
+        href="https://listenbrainz.org/user/flipse"
+        aria-label="See my latest scrobbled songs on my ListenBrainz profile (opens in new tab)"
+        target="_blank"
+        rel="noopener noreferrer">
+        Loading last played track…
+    </a>
+</div>
+
+<style>
+    .listened {
+        margin-block-start: var(--space-md);
+    }
+
+    svg {
+        height: 1.25rem;
+        width: 1.25rem;
+        vertical-align: bottom;
+        margin-right: var(--space-sm);
+        stroke-width: 1.75;
+        stroke: var(--text);
+        flex: none;
+    }
+
+    a.track {
+        font-weight: 500;
+        line-height: var(--leading-heading);
+        font-family: var(--font-family--mono);
+        color: var(--text-muted);
+        font-size: var(--text-xs);
+    }
+    a.track:hover {
+        color: var(--accent);
+        text-decoration: underline;
+    }
+</style>
+
+<script src="/assets/scripts/scrobble.js" defer></script>

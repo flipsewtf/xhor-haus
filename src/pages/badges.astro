@@ -1,0 +1,26 @@
+---
+//badges.astro
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+const pageTitle = 'Badges';
+const pageDescription = `Badges like it's 2002`;
+---
+
+<BaseLayout pageTitle={pageTitle} pageDescription={pageDescription}>
+    <div class="badges">
+        <div class="sr-only">88x31px badges</div>
+        <img src="/assets/images/button01.png" alt="Made by a human!" />
+        <img src="/assets/images/button02.png" alt="This Machine KILLS FASCISTS" />
+        <img src="/assets/images/button03.jpeg" alt="I break for Elves! (Legolas pictured)" />
+    </div>
+</BaseLayout>
+
+<style>
+    .badges {
+        margin: var(--space-xl);
+        margin-block-start: var(--space-xl);
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-sm);
+    }
+</style>

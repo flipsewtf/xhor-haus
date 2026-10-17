@@ -1,0 +1,115 @@
+---
+// MarkdownPostLayout.astro
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Lightbox from '@/components/base/Lightbox.astro';
+
+import '@/assets/styles/weblog.css';
+
+const {
+    // use the value passed from [...slug].astro
+    frontmatter,
+    readingTime,
+} = Astro.props;
+
+function timeAgo(date: Date) {
+    const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
+    const intervals: [string, number][] = [
+        ['year', 31536000],
+        ['month', 2592000],
+        ['week', 604800],
+        ['day', 86400],
+        ['hour', 3600],
+        ['minute', 60],
+    ];
+
+    for (const [label, secondsInUnit] of intervals) {
+        const count = Math.floor(seconds / secondsInUnit);
+        if (count >= 1) {
+            return `${count} ${label}${count > 1 ? 's' : ''} ago`;
+        }
+    }
+    return 'just now';
+}
+---
+
+<BaseLayout
+    mainClass="is-post"
+    pageTitle={frontmatter.title}
+    pageDescription={frontmatter.description}
+    hasOwnTitle={true}>
+    <article class="post" aria-labelledby="post-title">
+        <h1 id="post-title">{frontmatter.title}</h1>
+
+        <div class="entry-meta" role="group" aria-label="Post metadata">
+            <time
+                class="posted"
+                datetime={frontmatter.pubDate.toISOString()}
+                aria-label={`${frontmatter.pubDate.toLocaleDateString('en-GB', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric',
+                })}`}>
+                {
+                    frontmatter.pubDate.toLocaleDateString('en-GB', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric',
+                    })
+                }
+            </time>
+
+            {
+                frontmatter.lastUpdated && (
+                    <time
+                        class="updated"
+                        datetime={frontmatter.lastUpdated.toISOString()}
+                        aria-label={`Updated: ${frontmatter.lastUpdated.toLocaleDateString(
+                            'en-GB',
+                            {
+                                day: 'numeric',
+                                month: 'long',
+                                year: 'numeric',
+                            },
+                        )}`}>
+                        {' + '} updated {timeAgo(frontmatter.lastUpdated)}
+                    </time>
+                )
+            }
+
+            <div class="reading" aria-label={`Estimated reading time: ${readingTime} minutes`}>
+                {' / '}{readingTime} min read
+            </div>
+        </div>
+
+        {
+            frontmatter.tags && frontmatter.tags.length > 0 && (
+                <ul class="tags" aria-label="Tags">
+                    {frontmatter.tags.map((tag: string) => (
+                        <li>
+                            <a href={`/weblog/tags/${tag}`}>{tag}</a>
+                        </li>
+                    ))}
+                </ul>
+            )
+        }
+
+        {
+            frontmatter.image?.url ? (
+                <figure class="feature">
+                    <img
+                        class="post-feature lbox"
+                        src={frontmatter.image.url}
+                        alt={frontmatter.image.alt ?? ''}
+                    />
+                </figure>
+            ) : null
+        }
+
+        <p class="entry-desc">{frontmatter.description}</p>
+        <hr />
+
+        <slot />
+    </article>
+
+    <Lightbox />
+</BaseLayout>

@@ -1,0 +1,38 @@
+---
+// blog.astro
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import '@/assets/styles/weblog.css';
+
+const pageTitle = 'Weblog';
+
+const allPosts = (await getCollection('blog')).sort(
+    (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
+);
+
+const postsByMonth = Object.groupBy(allPosts, (post) =>
+    new Intl.DateTimeFormat('en-GB', { month: 'long', year: 'numeric' }).format(post.data.pubDate),
+);
+---
+
+<BaseLayout pageTitle={pageTitle}>
+    {
+        Object.entries(postsByMonth).map(([monthYear, posts]) => (
+            <section class="blog-month-group">
+                <h2 class="blog-heading">{monthYear}</h2>
+                <ul class="blog-list">
+                    {(posts ?? []).map((post) => (
+                        <li class="blog-title">
+                            <h3>
+                                <a class="prose-link" href={`/weblog/${post.id}`}>
+                                    {post.data.title}
+                                </a>
+                            </h3>
+                            <p class="desc">{post.data.description}</p>
+                        </li>
+                    ))}
+                </ul>
+            </section>
+        ))
+    }
+</BaseLayout>

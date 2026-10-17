@@ -1,0 +1,80 @@
+---
+// colophon.astro
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ExternalLink from '@/components/base/ExternalLink.astro';
+
+const pageTitle = `Colophon`;
+---
+
+<BaseLayout hasOwnTitle={false} pageTitle={pageTitle}>
+    <article class="flow page">
+        <h2>Xhor.haus</h2>
+        <p>
+            The domain and its TLD are a funny use of the word <em>Xhorhaus</em>, the house granted
+            to The Mighty Nein in Campaign 2 of Critical Role. This is my nerdy place on the
+            internet. I hope I do 'em proud.
+        </p>
+
+        <h2>Design &amp; Build</h2>
+
+        <p>
+            This site is built with Astro, served as static files via Cloudflare, with the source
+            hosted on GitHub.
+        </p>
+        <p>
+            This is a personal project, archiving and going back to owning my content like in the
+            noughties. I'm leaning into learning with transparency around my explorations.
+            Xhor.haus went live in October 2026 and aims to meet WCAG 2.1 AA accessibility
+            standards but is very much a work in progress.
+        </p>
+
+        <h2>Policy</h2>
+        <p>
+            No personal data, no cookies. The only analytics are Cloudflare's basic traffic
+            metrics, and honestly I couldn't care less about those.
+        </p>
+
+        <h2>Credits</h2>
+
+        <p>
+            <ExternalLink
+                href="https://piccalil.li/blog/my-favourite-3-lines-of-css/"
+                label="piccalil.li"
+            /> saved my flow margin-ass. I'm building a list of links tba asap!
+        </p>
+    </article>
+</BaseLayout>
+
+<style>
+    article:not(:last-of-type) {
+        margin-bottom: var(--space-2xl);
+    }
+    .definition {
+        border-block: var(--space-1px) solid var(--bg-lines);
+        padding: var(--space-lg);
+        margin-inline: var(--space-1px);
+
+        dd {
+            padding-left: var(--space-sm);
+        }
+
+        h2 {
+            font-family: var(--font-family--mono);
+        }
+
+        .pronunciation {
+            display: block;
+            font-family: var(--font-family--mono);
+            font-size: var(--text-xs);
+            color: var(--text);
+
+            &.simple {
+                font-style: italic;
+            }
+        }
+
+        .definition-description {
+            display: block;
+        }
+    }
+</style>

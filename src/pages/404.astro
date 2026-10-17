@@ -1,0 +1,22 @@
+---
+// src/pages/404.astro
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { IconSword } from '@tabler/icons-astro';
+---
+
+<BaseLayout pageTitle="404">
+    <p>
+        Sorry, the bugbear totally came and attacked the entire party, including
+        this page! Or, it didn't exist to begin with. There's nothing here except
+        this sword <IconSword />
+    </p>
+</BaseLayout>
+
+<style>
+    svg {
+        vertical-align: middle;
+        width: 1.5rem;
+        height: 1.5rem;
+        color: var(--text);
+    }
+</style>

@@ -1,0 +1,159 @@
+---
+//Footer.astro
+
+import { footerLinks } from '@/assets/data/footerLinks';
+import { socialLinks } from '@/assets/data/socialLinks';
+import { IconBrandBluesky } from '@tabler/icons-astro';
+import { IconBrandDiscord } from '@tabler/icons-astro';
+import { IconBrandGithub } from '@tabler/icons-astro';
+import { IconBrandInstagram } from '@tabler/icons-astro';
+import { IconTelescope } from '@tabler/icons-astro';
+
+const icons = {
+    bluesky: IconBrandBluesky,
+    discord: IconBrandDiscord,
+    github: IconBrandGithub,
+    instagram: IconBrandInstagram,
+};
+
+const current = Astro.url.pathname;
+const isActive = (path: string) => current === path;
+---
+
+<footer>
+    <div class="inner">
+        <nav class="main" aria-label="Footer links">
+            <ul>
+                {
+                    footerLinks.map((link) => (
+                        <li>
+                            <a
+                                href={link.href}
+                                aria-current={isActive(link.href) ? 'page' : undefined}>
+                                {link.label}
+                            </a>
+                        </li>
+                    ))
+                }
+                <li>
+                    <a
+                        href="/rss.xml"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Subscribe via RSS (opens in a new tab)">
+                        RSS
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <nav class="socials" aria-labelledby="find-me-label">
+            <span class="sr-only" id="find-me-label">Find me elsewhere</span>
+            <ul>
+                {
+                    socialLinks.map((link) => {
+                        const Icon = icons[link.icon];
+                        return (
+                            <li>
+                                <a
+                                    href={link.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={`${link.label} (opens in a new tab)`}>
+                                    <Icon aria-hidden="true" />
+                                </a>
+                            </li>
+                        );
+                    })
+                }
+            </ul>
+        </nav>
+        <div class="fun">
+            Made in Denmark by <IconTelescope title="stargazing" /> and panicking.
+        </div>
+    </div>
+</footer>
+
+<style>
+    footer {
+        width: 100%;
+        padding-block: var(--space-2xl) var(--space-xl);
+        background-image: repeating-linear-gradient(
+            to left,
+            var(--bg-lines) 0 3px,
+            transparent 3px 5px
+        );
+        background-size: auto 1px;
+        background-position: top;
+        background-repeat: no-repeat;
+    }
+    .inner {
+        max-width: var(--layout-content);
+        margin-inline: auto;
+        padding-inline: var(--layout-spacing);
+        display: grid;
+
+        grid-template-areas: 'links' 'socials' 'fun';
+
+        gap: var(--space-lg);
+    }
+    nav.main {
+        grid-area: links;
+    }
+    nav.main ul {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-sm) var(--space-xl);
+        align-items: flex-end;
+        font-weight: 500;
+        text-transform: capitalize;
+    }
+
+    nav.main ul a:hover {
+        color: var(--accent);
+    }
+
+    nav.main ul a[aria-current='page'] {
+        /* color: pink; */
+    }
+    nav.socials {
+        grid-area: socials;
+    }
+    nav.socials ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-md);
+    }
+
+    nav.socials a {
+        color: var(--text-muted);
+    }
+
+    nav.socials a:hover {
+        color: var(--accent);
+    }
+
+    .fun {
+        grid-area: fun;
+        font-family: var(--font-family--mono);
+        font-size: 0.8125rem;
+        font-weight: 500;
+    }
+    .fun svg {
+        height: 1rem;
+        width: 1rem;
+        stroke-width: 2;
+        margin-bottom: -0.0625rem;
+    }
+
+    @media (min-width: 37rem) {
+        .inner {
+            grid-template-areas:
+                'links socials'
+                'links fun';
+            gap: 0 var(--space-lg);
+            grid-template-rows: 1fr auto;
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+</style>

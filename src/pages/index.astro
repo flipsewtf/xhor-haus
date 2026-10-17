@@ -1,0 +1,89 @@
+---
+//index.astro
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+import Intro from '@/components/other/Intro.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { IconCaretRightFilled } from '@tabler/icons-astro';
+
+const MAX_POSTS = 5;
+const posts: CollectionEntry<'blog'>[] = await getCollection('blog');
+
+const latestPosts = posts
+    .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+    .slice(0, MAX_POSTS);
+const pageTitle = ``;
+---
+
+<BaseLayout hasOwnTitle={true} pageTitle={pageTitle} mainClass="homepage">
+    <Intro />
+
+    <hr />
+    <section>
+        <h2 class="sr-only">Latest words</h2>
+
+        <ul class="post-list">
+            {
+                latestPosts.map((post) => (
+                    <li>
+                        <time datetime={post.data.pubDate.toISOString()}>
+                            {new Intl.DateTimeFormat('en-GB', {
+                                day: '2-digit',
+                                month: '2-digit',
+                                year: '2-digit',
+                            })
+                                .formatToParts(post.data.pubDate)
+                                .filter((part) => part.type !== 'literal')
+                                .map((part) => part.value)
+                                .join('.')}
+                        </time>
+                        <div>
+                            <h3>
+                                <a class="prose-link" href={`/weblog/${post.id}`}>
+                                    {post.data.title}
+                                </a>
+                            </h3>
+                            <p class="desc">{post.data.description}</p>
+                        </div>
+                    </li>
+                ))
+            }
+        </ul>
+    </section>
+</BaseLayout>
+
+<style>
+    a.view-all {
+        display: inline-flex;
+        align-items: center;
+        font-family: var(--font-family--mono);
+        font-weight: 500;
+        margin-block: var(--space-sm) var(--space-xl);
+    }
+    a.view-all svg {
+        fill: var(--text);
+        transform: translateX(0);
+        transition: var(--transition-ease);
+    }
+
+    a.view-all:hover svg {
+        transform: translateX(0.25rem);
+    }
+    ul.post-list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-lg);
+    }
+    ul.post-list time {
+        display: block;
+        font-family: var(--font-family--mono);
+        margin-bottom: var(--space-sm);
+        font-size: var(--text-sm);
+        font-weight: 500;
+    }
+    ul.post-list p {
+        margin-top: var(--space-4px);
+        font-size: var(--text-sm);
+        color: var(--text-muted);
+    }
+</style>

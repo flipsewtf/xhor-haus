@@ -1,0 +1,90 @@
+---
+//Header.astro
+import { headerLinks } from '@/assets/data/headerLinks';
+
+const current = Astro.url.pathname;
+const isActive = (path: string) => current === path;
+---
+
+<header>
+    <nav class="main" aria-label="Main links">
+        <ul>
+            <li><a class="home" href="/">Xhor<span>.</span><span>haus</span></a></li>
+            {
+                headerLinks.map((link) => (
+                    <li>
+                        <a
+                            href={link.href}
+                            aria-current={isActive(link.href) ? 'page' : undefined}>
+                            {link.label}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </nav>
+
+    <button class="theme-toggle" type="button" aria-label="Toggle theme">
+        <svg viewBox="0 0 32 32" aria-hidden="true" fill="currentColor">
+            <path
+                class="dark-side-path"
+                d="M16 .5C7.4.5.5 7.4.5 16S7.4 31.5 16 31.5 31.5 24.6 31.5 16 24.6.5 16 .5zm0 28.1V3.4C23 3.4 28.6 9 28.6 16S23 28.6 16 28.6z">
+            </path>
+        </svg>
+    </button>
+</header>
+
+<style>
+    header {
+        width: 100%;
+        max-width: var(--layout-content);
+        margin-inline: auto;
+        display: flex;
+        gap: var(--space-md);
+        justify-content: space-between;
+        align-items: center;
+        padding-block: var(--space-xl);
+        padding-inline: var(--layout-spacing);
+    }
+    nav.main ul {
+        display: inline-flex;
+        gap: var(--space-md);
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    nav.main ul a {
+        font-weight: 600;
+    }
+    nav.main ul a.home {
+        font-family: var(--font-family--mono);
+        margin-right: var(--space-md);
+    }
+    a.home span:first-child {
+        color: var(--accent);
+        font-weight: 900;
+        font-size: var(--space-lg);
+        line-height: 0.5;
+    }
+    button.theme-toggle {
+        display: inline-flex;
+        position: fixed;
+        top: var(--space-xl);
+
+        right: var(--space-xl);
+    }
+    button.theme-toggle svg {
+        fill: currentColor;
+        stroke: none;
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+    :global(html.no-transition *) {
+        transition: none !important;
+    }
+    @media (min-width: 48rem) {
+        button.theme-toggle {
+            right: calc(50% - var(--layout-content) / 2 - 3rem);
+        }
+    }
+</style>

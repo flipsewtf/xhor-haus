@@ -1,0 +1,144 @@
+---
+// uses.astro
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import Desk1 from '@/assets/images/desk01.webp';
+import Desk2 from '@/assets/images/desk02.webp';
+import ExternalLink from '@/components/base/ExternalLink.astro';
+import Lightbox from '@/components/base/Lightbox.astro';
+
+const pageTitle = 'Uses';
+const pageDescription = `A list of the gear I currently use for my cozy workspace.`;
+---
+
+<BaseLayout
+    hasOwnTitle={true}
+    pageTitle={pageTitle}
+    pageDescription={pageDescription}>
+    <article class="flow">
+        <h1>Desk setup & gear</h1>
+
+        <p>I love a good desk setup, and here is my own attempt.</p>
+        <div class="photo-box">
+            <Image
+                class="lbox"
+                src={Desk1}
+                loading="eager"
+                alt="Cozy desk setup from left angle"
+            />
+
+            <Image
+                class="lbox"
+                src={Desk2}
+                loading="eager"
+                alt="Cozy desk setup from right angle"
+            />
+        </div>
+    </article>
+
+    <ul class="item-list">
+        <li class="item">
+            <strong>Computer</strong>
+            <ExternalLink
+                href="https://www.omen.com/us/en/desktops/omen-25l.html"
+                label="HP Omen 25L i5-12/16/2048/3070"
+            />
+        </li>
+
+        <li class="item">
+            <strong>Desk</strong>
+            <ExternalLink
+                href="https://www.ikea.com/gb/en/p/mittzon-desk-walnut-veneer-white-s49528057/"
+                label="IKEA Mittzon"
+            />
+        </li>
+
+        <li class="item">
+            <strong>Headphones</strong>
+            <ExternalLink
+                href="https://www.jlab.com/products/go-pop-anc-true-wireless-earbuds-black"
+                label="JLab Go Pop ANC"
+            />
+        </li>
+
+        <li class="item">
+            <strong>Keyboard</strong>
+            <ExternalLink
+                href="https://www.keychron.com/products/keychron-k10-he-wireless-magnetic-switch-keyboard?variant=42362366951513"
+                label="Keychron K10 HE Custom"
+            />
+        </li>
+
+        <li class="item">
+            <strong>Monitor</strong>
+            <ExternalLink
+                href="https://arozzi.se/products/nova-34-curved-va-165hz-gaming-monitor?variant=50802657952082"
+                label="Nova 34“ Curved VA 165Hz Forest green"
+            />
+        </li>
+
+        <li class="item">
+            <strong>Monitor Arm</strong>
+            <ExternalLink
+                href="https://arozzi.se/products/alzare-neo-single-gas-spring-monitor-arm?variant=50803666813266"
+                label="Alzare Neo Single Forest green"
+            />
+        </li>
+
+        <li class="item">
+            <strong>Mouse</strong>
+            <ExternalLink
+                href="https://www.logitech.com/en-eu/products/mice/lift-vertical-ergonomic-mouse.html"
+                label="Logitech Vertical Ergonomic Lift"
+            />
+        </li>
+
+        <li class="item">
+            <strong>Phone</strong>
+            <ExternalLink
+                href="https://www.samsung.com/uk/smartphones/galaxy-s25/"
+                label="Samsung Galaxy S25"
+            />
+        </li>
+
+        <li class="item">
+            <strong>Tablet</strong>
+            <ExternalLink
+                href="https://www.samsung.com/uk/tablets/galaxy-tab-s/galaxy-tab-s9-plus-5g-graphite-256gb-sm-x816bzaaeub/"
+                label="Samsung Galaxy Tab S9+"
+            />
+        </li>
+    </ul>
+    <Lightbox />
+</BaseLayout>
+
+<style>
+    .photo-box {
+        display: grid;
+        overflow: hidden;
+        border-radius: var(--radius-img);
+        grid-template-columns: 1fr 1fr;
+        margin-inline: var(--offset-margin-img);
+    }
+    .photo-box a {
+        display: inline-flex;
+    }
+    .item-list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--flow-space);
+        margin-block-start: var(--space-2xl);
+    }
+
+    .item-list strong {
+        font-weight: 500;
+    }
+
+    .item-list strong::after {
+        content: ': ';
+    }
+
+    :global(.external-link) {
+        font-family: var(--font-family--mono);
+    }
+</style>

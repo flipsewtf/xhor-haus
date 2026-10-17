@@ -1,0 +1,29 @@
+---
+//badges.astro
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ExternalLink from '@/components/base/ExternalLink.astro';
+
+const pageTitle = 'About';
+const pageDescription = `Bio of Flipse`;
+---
+
+<BaseLayout pageTitle={pageTitle} pageDescription={pageDescription}>
+    <article class="prose flow">
+        <p>
+            I right-clicked <em>view source</em> sometime around 1999 and got my own domain
+            quickly after. I have after 15+ years of creating <ExternalLink
+                href="https://mournstera.tumblr.com/"
+                label="Tumblr"
+            /> themes, left that behind. I am now here.
+        </p>
+
+        <p>
+            I dig live music, D&amp;D, <dfn
+                title="The smell of rain hitting warm ground, pavement, and asphalt"
+                >petrichor</dfn
+            >, and desk setups.
+        </p>
+    </article>
+</BaseLayout>
+
+<style></style>

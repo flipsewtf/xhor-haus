@@ -1,0 +1,28 @@
+---
+//Intro.astro
+
+import ExternalLink from '@/components/base/ExternalLink.astro';
+---
+
+<h1>Hey, so I'm Flipse, or whatever.</h1>
+
+<div class="prose flow">
+    <p>
+        <b>Just kidding, there's nothing nonchalant about me.</b> A late-30s nerd of music and
+        [insert current obsession]. Disabled/retired, but occasionally doing NASA's <ExternalLink
+            href="https://science.nasa.gov/citizen-science/"
+            label="homework"
+        /> and picking fights with quantum physics just for kicks. I will recite the entire
+        script of the 1998 hit movie <em>Armageddon</em> if I like you. The 'tism is strong
+        with this one. <a class="prose-link" href="/about"
+            >More<span class="sr-only"> about me</span></a
+        >?
+    </p>
+</div>
+
+<style>
+    dfn {
+        font-style: normal;
+        cursor: help;
+    }
+</style>

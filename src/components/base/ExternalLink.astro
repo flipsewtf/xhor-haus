@@ -1,0 +1,13 @@
+---
+//ExternalLink.astro
+const { href, label } = Astro.props;
+---
+
+<a
+    href={href}
+    class="prose-link external-link"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={`${label} (opens in a new tab)`}>
+    <span class="external-link-text" aria-hidden="true">{label}</span>
+</a>

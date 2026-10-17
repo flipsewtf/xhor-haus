@@ -1,0 +1,140 @@
+---
+// Lightbox.astro
+import { IconX } from '@tabler/icons-astro';
+---
+
+<dialog id="lightbox" aria-label="Image lightbox" aria-modal="true">
+    <button id="lightbox-close" aria-label="Close lightbox"><IconX /></button>
+    <figure>
+        <img id="lightbox-img" src="" alt="" />
+    </figure>
+</dialog>
+
+<script>
+    document.addEventListener('astro:page-load', () => {
+        const dialog = document.getElementById('lightbox') as HTMLDialogElement | null;
+        const img = document.getElementById('lightbox-img') as HTMLImageElement | null;
+        const closeBtn = document.getElementById('lightbox-close') as HTMLButtonElement | null;
+
+        // Pages without a lightbox (home, etc.) also fire this event
+        if (!dialog || !img || !closeBtn) return;
+
+        let closing = false;
+
+        const openLightbox = (sourceEl: HTMLImageElement) => {
+            img.src = sourceEl.getAttribute('src') ?? '';
+            img.alt = sourceEl.getAttribute('alt') ?? '';
+
+            dialog.showModal();
+            document.documentElement.style.overflow = 'hidden';
+
+            requestAnimationFrame(() => {
+                dialog.classList.add('is-open');
+            });
+        };
+
+        const closeLightbox = () => {
+            if (closing) return;
+
+            closing = true;
+            dialog.classList.remove('is-open');
+
+            dialog.addEventListener(
+                'transitionend',
+                () => {
+                    dialog.close();
+                    document.documentElement.style.overflow = '';
+                    closing = false;
+                },
+                { once: true },
+            );
+        };
+
+        document.querySelectorAll('.post img, img.lbox').forEach((postImg) => {
+            const el = postImg as HTMLImageElement;
+            el.style.cursor = 'zoom-in';
+            el.addEventListener('click', () => openLightbox(el));
+        });
+
+        closeBtn.addEventListener('click', closeLightbox);
+
+        dialog.addEventListener('click', (e) => {
+            if (e.target === dialog) closeLightbox();
+        });
+
+        dialog.addEventListener('cancel', (e) => {
+            e.preventDefault();
+            closeLightbox();
+        });
+    });
+</script>
+
+<style>
+    dialog {
+        max-width: 92vw;
+        max-height: 92vh;
+        margin: auto;
+        opacity: 0;
+        transform: scale(0.92);
+        transition:
+            opacity var(--transition-ease),
+            transform var(--transition-ease);
+        border: none;
+        padding: 0;
+        background-color: transparent;
+    }
+
+    dialog[open] {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-md);
+        align-items: center;
+    }
+
+    dialog.is-open {
+        opacity: 1;
+        transform: scale(1);
+        transition-delay: 0.85s;
+    }
+
+    dialog::backdrop {
+        background-color: #00000000;
+        transition: background-color var(--transition-ease);
+    }
+
+    dialog.is-open::backdrop {
+        background-color: var(--bg-trans);
+        transition-delay: 0.33s;
+        cursor: zoom-out;
+    }
+
+    dialog:not(.is-open),
+    dialog:not(.is-open)::backdrop {
+        pointer-events: none;
+        pointer-events: none;
+    }
+
+    dialog img {
+        max-width: 100%;
+        max-height: 80vh;
+        display: block;
+        border-radius: var(--radius-md);
+    }
+
+    #lightbox-close {
+        background-color: var(--bg-alt);
+        cursor: pointer;
+        border-radius: var(--radius-full);
+        padding: var(--space-xs);
+        display: inline-flex;
+        border: var(--space-1px) solid var(--border);
+    }
+
+    #lightbox-close:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+    }
+    #lightbox-close:focus-visible {
+        display: none;
+    }
+</style>

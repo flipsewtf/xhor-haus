@@ -1,0 +1,58 @@
+# ======================
+# my files
+# ======================
+
+src/content/weblog/wip/
+
+# ======================
+# Build output / generated
+# ======================
+dist/
+.astro/
+*.tsbuildinfo    
+
+# TypeScript incremental build info
+
+# ======================
+# Dependencies
+# ======================
+node_modules/
+
+# ======================
+# Logs
+# ======================
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ======================
+# Environment files
+# ======================
+.env
+.env.production
+.env.local
+
+# ======================
+# Editor / IDE settings
+# ======================
+.idea/            # JetBrains IDEs
+
+# ======================
+# OS / system files
+# ======================
+.DS_Store         # macOS
+Thumbs.db         # Windows
+ehthumbs.db       # Windows
+
+# ======================
+# Prettier / formatting cache
+# ======================
+.prettiercache
+
+# ======================
+# Temporary / backup files
+# ======================
+*~
+*.bak
+*.swp
