@@ -1,3 +1,3 @@
 // src/assets/data/site-desc.ts
 export const siteDescription =
-    "I aim to be a cosmic inconvenience for mediocre folk. It's a post-people-pleaser path, and it's rocky.";
+    "Flipse's place on the internet. It's a post-people-pleaser path, and it's rocky.";
