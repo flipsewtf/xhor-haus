@@ -22,11 +22,4 @@ const blog = defineCollection({
     }),
 });
 
-const log = defineCollection({
-    loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/log' }),
-    schema: z.object({
-        pubDate: z.date(),
-    }),
-});
-
-export const collections = { blog, log };
+export const collections = { blog };
