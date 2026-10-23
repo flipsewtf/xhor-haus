@@ -11,10 +11,7 @@ const pageTitle = 'Uses';
 const pageDescription = `A list of the gear I currently use for my cozy workspace.`;
 ---
 
-<BaseLayout
-    hasOwnTitle={true}
-    pageTitle={pageTitle}
-    pageDescription={pageDescription}>
+<BaseLayout hasOwnTitle={true} pageTitle={pageTitle} pageDescription={pageDescription}>
     <article class="flow">
         <h1>Desk setup & gear</h1>
 
@@ -116,7 +113,6 @@ const pageDescription = `A list of the gear I currently use for my cozy workspac
     .photo-box {
         display: grid;
         overflow: hidden;
-        border-radius: var(--radius-img);
         grid-template-columns: 1fr 1fr;
         margin-inline: var(--offset-margin-img);
     }
