@@ -2,8 +2,11 @@
 // BaseLayout.astro
 
 import BaseHead from '@/components/base/BaseHead.astro';
-import Header from '@/components/base/Header.astro';
+import Sprite from '@/components/base/Sprite.astro';
+import ThemeToggle from '@/components/base/ThemeToggle.astro';
 import Footer from '@/components/base/Footer.astro';
+import SidebarLeft from '@/components/base/SidebarLeft.astro';
+import SidebarRight from '@/components/base/SidebarRight.astro';
 
 import { siteDescription } from '@/assets/data/site-desc';
 
@@ -17,17 +20,22 @@ const {
 } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="en" transition:name="root" transition:animate="none">
     <head>
         <BaseHead title={seoTitle ?? pageTitle} description={pageDescription} image={pageImage} />
     </head>
     <body>
-        <Header />
+        <Sprite />
+        <ThemeToggle />
         <main class:list={[mainClass]}>
-            <section class="main-content">
+            <div class="lines lines-left"></div>
+            <div class="lines lines-right"></div>
+            <aside class="sb sb-left"><SidebarLeft /></aside>
+            <section class="main-content" transition:animate="fade">
                 {!hasOwnTitle && pageTitle && <h1>{pageTitle}</h1>}
                 <slot />
             </section>
+            <aside class="sb sb-right"><SidebarRight /></aside>
         </main>
         <Footer />
     </body>

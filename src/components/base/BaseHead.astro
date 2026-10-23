@@ -57,6 +57,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             const isDark = root.getAttribute('data-theme') === 'dark';
             document.querySelectorAll('.theme-toggle').forEach((btn) => {
                 btn.ariaPressed = String(isDark);
+                btn.title = isDark ? 'toggle light mode' : 'toggle dark mode';
             });
         };
 
