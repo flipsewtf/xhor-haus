@@ -3,19 +3,70 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import ExternalLink from '@/components/base/ExternalLink.astro';
 
 const pageTitle = `Now`;
+
+const lastTended = '2026-10-23';
+
+const lastTendedDisplay = new Intl.DateTimeFormat('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'UTC',
+}).format(new Date(lastTended));
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-    <p>
-        What I have been up to as of late. This is a /now page, you can learn more about at <ExternalLink
-            href="nownownow.com/about"
-            label="nownownow.com"
-        />
-    </p>
+    <article class="prose flow">
+        <p>
+            What I have been up to as of late. This is a /now page, which you can learn more about
+            at <ExternalLink href="https://nownownow.com/about" label="nownownow.com" />.
+        </p>
 
-    Last
-    <hr />
+        <p class="last">
+            Last tended to: <time datetime={lastTended}>{lastTendedDisplay}</time>
+        </p>
 
-    <p>test</p>
+        <hr />
+        <h2><span aria-hidden="true">&#8594;</span> Working on</h2>
+
+        <p>
+            This is my second build of an Astro project. Currently trying to make smarter choices
+            for future iterations. I'm also having fun with the ListenBrainz API. We'll see where
+            that takes me.
+        </p>
+
+        <h2><span aria-hidden="true">&#8594;</span> Thinking about</h2>
+
+        <p>
+            How to manage my time as my health has changed once again. I'm already very selective
+            about my attention and energy — how can I improve my overall joy despite failing in
+            certain aspects?
+        </p>
+
+        <h2><span aria-hidden="true">&#8594;</span> Personal</h2>
+        <p>
+            Dealing with a large number of related and unrelated physical problems. I'm going to be
+            having tests done and more blood drawn. I'm eyeing long COVID once again, but it could
+            be a million things.
+        </p>
+    </article>
 </BaseLayout>
-<style></style>
+<style>
+    .last {
+        color: var(--text-muted);
+        font-family: var(--font-family--mono);
+        font-size: var(--text-sm);
+    }
+
+    h2 {
+        line-height: 1;
+        font-size: var(--text-base);
+        color: var(--text-muted);
+        font-weight: 400;
+        font-family: var(--font-family--mono);
+    }
+    h2 span {
+        font-size: var(--text-xl);
+        line-height: 0;
+        margin-inline-end: var(--space-4px);
+    }
+</style>
