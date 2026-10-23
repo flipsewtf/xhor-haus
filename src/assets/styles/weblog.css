@@ -15,9 +15,6 @@ section.blog-month-group {
         gap: var(--space-md);
     }
 
-    h3 a.prose-link:hover {
-        color: var(--accent);
-    }
     p {
         color: var(--text-muted);
         margin-top: var(--space-4px);
@@ -28,6 +25,7 @@ article.post {
 
     h1#post-title {
         margin-block-end: var(--space-md);
+        text-transform: lowercase;
     }
 
     /* IMAGES */
@@ -46,7 +44,6 @@ article.post {
         width: 100%;
         height: auto;
         overflow: hidden;
-        border-radius: var(--radius-img);
         max-width: unset;
         object-fit: cover;
         aspect-ratio: 6/4;
@@ -102,7 +99,7 @@ article.post {
         background-color: var(--bg-alt);
     }
     ul.tags a:hover {
-        border-color: inherit;
+        border-color: var(--accent-muted);
     }
 
     /* FLOW */
@@ -114,18 +111,6 @@ article.post {
     ul ul,
     ol ol {
         margin-block: var(--flow-space);
-    }
-    hr {
-        border: none;
-        display: block;
-        height: var(--space-1px);
-        margin-block: var(--space-2xl);
-        background-size: auto 100%;
-        background-image: repeating-linear-gradient(
-            to right,
-            transparent 0 2px,
-            var(--bg-lines) 2px 5px
-        );
     }
 
     /* --------------------  BLOCKQUOTE */
@@ -147,7 +132,6 @@ article.post {
         padding: var(--space-md);
         overflow-x: auto;
         border: var(--space-1px) solid var(--border);
-        margin-inline: var(--space-lg);
         border-radius: var(--radius-sm);
     }
 
@@ -198,7 +182,7 @@ article.post {
 
     ul:not(.tags) li::marker {
         color: var(--text-muted);
-        content: '–';
+        content: '— ';
         transition: color var(--transition-smooth);
     }
 
