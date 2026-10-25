@@ -1,15 +1,19 @@
 ---
 //index.astro
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import Connect from '@/components/other/Connect.astro';
 
 const pageTitle = ``;
 ---
 
-<BaseLayout hasOwnTitle={true} pageTitle={pageTitle} mainClass="homepage">
-    <h1>Xhor.haus</h1>
+<BaseLayout hasOwnTitle={false} pageTitle={pageTitle} mainClass="homepage">
+    <h1 class="sr-only">Welcome</h1>
     <article class="prose flow">
-        <p>Well, Hi and welcome in! This is my little corner of the internet.</p>
+        <p>
+            Well, Hi and welcome in! This is my little corner of the internet. I don't know what
+            this will be yet, but I'm a little excited.
+        </p>
     </article>
-</BaseLayout>
 
-<style></style>
+    <Connect />
+</BaseLayout>

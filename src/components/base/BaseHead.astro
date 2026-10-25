@@ -36,60 +36,72 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 <title>Xhor.haus{title ? ` | ${title}` : ''}</title>
 
-<link rel="preload" href="/assets/fonts/thinker.woff2" as="font" type="font/woff2" crossorigin />
-
 <script is:inline>
     (() => {
         const root = document.documentElement;
         const storageKey = 'theme-mode';
+        const order = ['light', 'system', 'dark'];
         const mql = window.matchMedia('(prefers-color-scheme: dark)');
+        const labels = { light: 'Light theme', system: 'System theme', dark: 'Dark theme' };
 
-        const getTheme = () =>
-            localStorage.getItem(storageKey) || (mql.matches ? 'dark' : 'light');
+        let direction = 'forward';
 
-        const applyToRoot = (target, theme) => {
+        const getMode = () => {
+            const stored = localStorage.getItem(storageKey);
+            return order.includes(stored) ? stored : 'system';
+        };
+
+        const resolveTheme = (mode) => {
+            if (mode === 'system') return mql.matches ? 'dark' : 'light';
+            return mode;
+        };
+
+        const applyToRoot = (target, mode) => {
+            const theme = resolveTheme(mode);
             target.setAttribute('data-theme', theme);
+            target.setAttribute('data-theme-mode', mode);
             target.style.colorScheme = theme;
             target.dataset.ready = 'true';
         };
 
         const syncButtons = () => {
-            const isDark = root.getAttribute('data-theme') === 'dark';
+            const label = labels[getMode()];
             document.querySelectorAll('.theme-toggle').forEach((btn) => {
-                btn.ariaPressed = String(isDark);
-                btn.title = isDark ? 'toggle light mode' : 'toggle dark mode';
+                btn.setAttribute('aria-label', label);
+                btn.title = label;
             });
         };
 
-        const switchTheme = (theme) => {
+        const switchMode = (mode) => {
             root.classList.add('no-transition');
-            applyToRoot(root, theme);
+            applyToRoot(root, mode);
             syncButtons();
             setTimeout(() => root.classList.remove('no-transition'), 50);
         };
 
-        // apply on first load, before the page paints
-        applyToRoot(root, getTheme());
+        applyToRoot(root, getMode());
 
-        // apply to the incoming page on every navigation
         document.addEventListener('astro:before-swap', (event) => {
-            applyToRoot(event.newDocument.documentElement, getTheme());
+            applyToRoot(event.newDocument.documentElement, getMode());
         });
 
-        // refresh the buttons aria-pressed after every navigation
         document.addEventListener('astro:page-load', syncButtons);
 
         document.addEventListener('click', (event) => {
             if (!event.target.closest('.theme-toggle')) return;
-            const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            switchTheme(next);
+
+            const i = order.indexOf(getMode());
+
+            if (i === 0) direction = 'forward';
+            if (i === order.length - 1) direction = 'backward';
+
+            const next = order[direction === 'forward' ? i + 1 : i - 1];
             localStorage.setItem(storageKey, next);
+            switchMode(next);
         });
 
-        mql.addEventListener('change', (e) => {
-            const systemTheme = e.matches ? 'dark' : 'light';
-            switchTheme(systemTheme);
-            localStorage.setItem(storageKey, systemTheme);
+        mql.addEventListener('change', () => {
+            if (getMode() === 'system') switchMode('system');
         });
     })();
 </script>

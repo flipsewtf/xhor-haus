@@ -1,5 +1,5 @@
 ---
-//badges.astro
+//About.astro
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import ExternalLink from '@/components/base/ExternalLink.astro';
 
@@ -11,26 +11,37 @@ const pageDescription = `Bio of Flipse`;
     <h1>Hey, so I'm Flipse, or whatever.</h1>
     <article class="prose flow">
         <p>
-            <b>Just kidding, there's nothing nonchalant about me.</b> A late-30s nerd of music and [insert
-            current obsession]. Disabled/retired, but occasionally doing NASA's <ExternalLink
-                href="https://science.nasa.gov/citizen-science/"
-                label="homework"
-            /> and picking fights with quantum physics just for kicks. I will recite the entire script
-            of the 1998 hit movie <em>Armageddon</em> if I like you. The 'tism is strong with this one.
-        </p>
-        <p>
-            I right-clicked <em>view source</em> sometime around 1999 and got my own domain quickly after.
-            I have after 15+ years of creating <ExternalLink
-                href="https://mournstera.tumblr.com/"
-                label="Tumblr"
-            /> themes, left that behind. I am now here.
+            <b>Just kidding, there's nothing nonchalant about me.</b>{' '}
+            A late-30s nerd of music and [insert current obsession]. Disability retired, but occasionally
+            doing NASA's{' '}
+            <ExternalLink href="https://science.nasa.gov/citizen-science/" label="homework" /> and picking
+            fights with quantum physics just for kicks. I will recite the entire script of the 1998 hit
+            movie <em>Armageddon</em> if I like you. The 'tism is strong with this one.
         </p>
 
         <p>
-            I dig live music, D&amp;D, <dfn
-                title="The smell of rain hitting warm ground, pavement, and asphalt">petrichor</dfn
-            >, and desk setups. If you wanna check out my <em>own</em> setup, you can do so here on my
-            <a class="prose-link" href="/uses"> /uses</a> page.
+            I'm a cis bisexual woman from Denmark, my pronouns are she/her. I dig live music,
+            D&amp;D, <dfn title="The smell of rain hitting warm ground, pavement, and asphalt"
+                >petrichor</dfn
+            >, and desk setups. If you wanna check out <em>my</em> setup, you can do so here on my
+            {' '}<a class="prose-link" href="/uses">/uses</a> page.
+        </p>
+
+        <h2>Chronically online since 1999</h2>
+        <p>
+            I right-clicked <em>view source</em> sometime around 1999 and got my own domain quickly after.
+            I was blogging and coding and making online friends I still have to this day. The Lord of
+            the Rings and Livejournal were my introduction to fandoms, I made graphics and terrible websites
+            and it was wonderful.
+        </p>
+
+        <p>
+            I arrived at Tumblr in the summer of 2009, and I have after 15+ years of creating and
+            publishing <ExternalLink
+                href="https://mournstera.tumblr.com/"
+                label="Tumblr themes"
+            />, left that behind. I am now here. Back to carving my own corner, my own <em>haus</em
+            > on the big web.
         </p>
     </article>
 </BaseLayout>

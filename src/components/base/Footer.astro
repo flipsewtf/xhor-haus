@@ -5,37 +5,38 @@ import { IconTelescope } from '@tabler/icons-astro';
 ---
 
 <footer>
-    <div class="inner">
-        <span class="copysign">&copy</span> 2026 Flipse H. Made in Denmark by <IconTelescope
-            title="stargazing"
-        /> and panicking.
+    <div>
+        <span class="copysign">&copy</span> 2026 Flipse H. Made by <span
+            role="img"
+            aria-label="stargazing"
+            title="stargazing"><IconTelescope /></span
+        > and panic.
+    </div>
+    <div>
+        <a href="/colophon"> Colophon</a> &middot; <a
+            href="https://github.com/flipsewtf/xhor-haus"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub repo (opens in a new tab)">
+            GitHub</a
+        >
     </div>
 </footer>
 
 <style>
     footer {
-        background-image: repeating-linear-gradient(
-            to left,
-            var(--bg-lines) 0 3px,
-            transparent 3px 5px
-        );
-        background-size: auto 1px;
-        background-position: top;
-        background-repeat: no-repeat;
-        width: 100%;
-    }
-    .inner {
         font-family: var(--font-family--mono);
         color: var(--text-muted);
-        font-size: 0.8125rem;
+        font-size: var(--text-xs);
         font-weight: 500;
-        text-align: center;
-        background-color: var(--bg-alt);
-        padding-block: var(--space-sm);
-        width: calc(var(--layout-content));
-        margin-inline: auto;
-        padding-inline: var(--layout--content-padding);
-        margin-top: var(--space-1px);
+        border-top: var(--space-1px) solid var(--bg-lines);
+        padding-block-start: var(--space-md);
+        margin-block-start: clamp(3rem, 10vw, 4.5rem);
+        display: flex;
+        gap: var(--space-sm);
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
     }
     .copysign {
         font-size: var(--text-xl);
@@ -44,6 +45,13 @@ import { IconTelescope } from '@tabler/icons-astro';
         height: 1rem;
         width: 1rem;
         stroke-width: 2;
-        margin-bottom: -0.0625rem;
+        margin-bottom: -0.125rem;
+    }
+
+    @media (min-width: 48rem) {
+        footer {
+            padding-inline: 0;
+            flex-direction: row;
+        }
     }
 </style>

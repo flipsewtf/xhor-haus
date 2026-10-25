@@ -1,0 +1,100 @@
+---
+//Header.astro
+import ThemeToggle from '@/components/base/ThemeToggle.astro';
+
+const current = Astro.url.pathname;
+const isActive = (path: string) => current === path;
+---
+
+<header>
+    <div class="home-wrap">
+        <a class="home" href="/" aria-current={isActive('/') ? 'page' : undefined}>xhor.haus</a>
+        <p>It's a post-people-pleaser path, and it's rocky.</p>
+    </div>
+    <nav class="main" aria-label="Main links">
+        <ul>
+            <li>
+                <a href="/about" aria-current={isActive('/about') ? 'page' : undefined}>About</a>
+            </li>
+            <li>
+                <a href="/weblog" aria-current={isActive('/weblog') ? 'page' : undefined}>Log</a>
+            </li>
+            <li>
+                <a href="/now" aria-current={isActive('/now') ? 'page' : undefined}>Now</a>
+            </li>
+        </ul>
+    </nav>
+
+    <ThemeToggle />
+</header>
+
+<style>
+    header {
+        display: grid;
+        gap: var(--space-sm);
+        grid-template-areas:
+            'theme'
+            'home'
+            'links';
+        grid-template-columns: 1fr;
+        margin-block-end: clamp(3.25rem, 8vw, 6rem);
+    }
+    :global(button.theme-toggle) {
+        margin-left: auto;
+    }
+    .home-wrap {
+        grid-area: home;
+    }
+    .home {
+        font-family: var(--font-family--body);
+        font-stretch: 75%;
+        text-wrap: pretty;
+        font-weight: 550;
+        font-size: var(--text-xxl);
+    }
+
+    .home-wrap p {
+        font-family: var(--font-family--mono);
+        font-size: var(--text-xs);
+        font-weight: 500;
+        margin-block-start: var(--space-4px);
+    }
+    nav.main {
+        grid-area: links;
+    }
+    :global(button.theme-toggle) {
+        grid-area: theme;
+    }
+    nav.main ul {
+        display: flex;
+        font-family: var(--font-family--mono);
+        gap: var(--space-md);
+        font-size: var(--text-sm);
+        font-weight: 500;
+    }
+    nav.main a {
+        color: var(--text-muted);
+    }
+    nav.main a:hover {
+        color: var(--accent);
+    }
+    nav.main a[aria-current='page'] {
+        color: var(--text);
+    }
+
+    @media (min-width: 48rem) {
+        header {
+            grid-template-areas: 'home links theme';
+            grid-template-columns: auto 1fr auto;
+            justify-items: end;
+        }
+
+        :global(button.theme-toggle) {
+            margin-inline-start: var(--space-md);
+        }
+        nav.main ul {
+            min-height: var(--space-lg);
+            align-items: center;
+        }
+    }
+</style>

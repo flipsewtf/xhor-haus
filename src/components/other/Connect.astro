@@ -1,0 +1,75 @@
+---
+//connect.astro
+import { IconBrandBluesky, IconBrandThreads, IconBrandDiscord } from '@tabler/icons-astro';
+---
+
+<section class="connect">
+    <h2>Connect</h2>
+    <nav class="socials">
+        <ul>
+            <li>
+                <a
+                    href="https://bsky.app/profile/flipse.wtf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Bluesky (opens in a new tab)">
+                    <IconBrandBluesky /> Bluesky
+                </a>
+            </li>
+            <li>
+                <a
+                    href="https://www.threads.com/@flipse.wtf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Threads (opens in a new tab)">
+                    <IconBrandThreads /> Threads
+                </a>
+            </li>
+            <li>
+                <a
+                    href="https://discord.com/users/910190469726740480"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Discord (opens in a new tab)">
+                    <IconBrandDiscord /> Discord
+                </a>
+            </li>
+        </ul>
+    </nav>
+</section>
+<style>
+    section.connect {
+        margin-block-start: var(--space-2xl);
+    }
+    h2 {
+        margin-block-end: var(--space-lg);
+    }
+    nav.socials ul {
+        display: inline-flex;
+        gap: var(--space-lg);
+
+        flex-wrap: wrap;
+    }
+    nav.socials li {
+        display: inline-flex;
+    }
+    nav.socials a {
+        font-family: var(--font-family--mono);
+        display: inline-flex;
+        gap: var(--space-xs);
+        align-items: center;
+        font-size: var(--text-xs);
+        font-weight: 500;
+        color: var(--text);
+    }
+    nav.socials a:hover {
+        color: var(--accent);
+    }
+    nav.socials svg {
+        stroke: var(--text);
+        stroke-width: 1.5px;
+        height: 1.25rem;
+        width: 1.25rem;
+        margin-block-end: var(--space-1px);
+    }
+</style>

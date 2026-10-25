@@ -1,42 +1,81 @@
 ---
 //ThemeToggle.astro
+import { IconCircleHalf2, IconMoon2, IconBrightnessUp } from '@tabler/icons-astro';
 ---
 
 <button class="theme-toggle" type="button" aria-label="Toggle theme" title="toggle theme">
-    <svg class="sunglasses" aria-hidden="true"><use href="#sunglasses"></use></svg>
-    <svg class="moon" aria-hidden="true"><use href="#moon"></use></svg>
+    <span class="theme-ball">
+        <IconBrightnessUp class="sun" />
+        <IconCircleHalf2 class="system" />
+        <IconMoon2 class="moon" />
+    </span>
 </button>
 
 <style>
     button.theme-toggle {
-        display: inline-flex;
-        position: absolute;
-        right: var(--layout-spacing);
-        top: var(--space-md);
-        z-index: 1;
+        --toggle-height: var(--space-lg);
+        --toggle-width: calc((var(--toggle-height) * 2) - var(--space-2px));
+        --toggle-ball: calc(var(--toggle-height) - var(--space-4px));
+        height: var(--toggle-height);
+        width: var(--toggle-width);
+        background-color: var(--bg-alt);
+        border: var(--space-1px) solid var(--border);
+        display: block;
+        border-radius: var(--radius-full);
     }
     button.theme-toggle svg {
-        display: none;
-        fill: currentColor;
-        stroke: none;
-        width: 3rem;
-        height: 3rem;
+        width: var(--toggle-ball);
+        height: var(--toggle-ball);
+        stroke: var(--text);
+        stroke-width: 1.75;
+        position: absolute;
+        transform-origin: center;
+        transform-box: fill-box;
+        transition: transform 0.3s ease-out;
+        opacity: 0;
+        transform: rotate(-180deg);
+        inset: 0;
     }
-
-    :global(html[data-theme='light']) svg.sunglasses {
+    span.theme-ball {
+        color: var(--text);
+        position: relative;
         display: block;
+        width: var(--toggle-ball);
+        height: var(--toggle-ball);
+        transition: transform 0.3s cubic-bezier(0.21, 0.02, 0, 1.06);
     }
 
-    :global(html[data-theme='dark']) svg.moon {
-        display: block;
+    :global(html[data-theme-mode='light']) span.theme-ball {
+        transform: translateX(var(--space-1px));
     }
 
-    :global(html.no-transition *) {
+    :global(html[data-theme-mode='light']) svg.sun {
+        opacity: 1;
+        transform: rotate(0deg);
+        padding: var(--space-1px);
+    }
+
+    :global(html[data-theme-mode='system']) span.theme-ball {
+        transform: translateX(
+            calc(var(--toggle-width) / 2 - var(--toggle-ball) / 2 - var(--space-1px))
+        );
+    }
+
+    :global(html[data-theme-mode='system']) svg.system {
+        opacity: 1;
+        transform: rotate(0deg);
+    }
+
+    :global(html[data-theme-mode='dark']) span.theme-ball {
+        transform: translateX(calc(var(--toggle-width) - var(--toggle-ball) - var(--space-3px)));
+    }
+
+    :global(html[data-theme-mode='dark']) svg.moon {
+        opacity: 1;
+        transform: rotate(0deg);
+    }
+
+    :global(html.no-transition *:not(button.theme-toggle *)) {
         transition: none !important;
-    }
-    @media (min-width: 48rem) {
-        button.theme-toggle {
-            right: calc(50% - var(--layout-content) / 2 + var(--layout--content-padding));
-        }
     }
 </style>

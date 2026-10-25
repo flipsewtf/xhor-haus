@@ -41,6 +41,7 @@ article.post {
         margin-block: var(--space-xl);
     }
     img {
+        border-radius: var(--img-border-radius);
         width: 100%;
         height: auto;
         overflow: hidden;
