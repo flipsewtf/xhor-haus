@@ -113,14 +113,14 @@ html[data-theme='light'] {
 }
 
 html[data-theme='dark'] {
-    --text: oklch(98% 0 0);
+    --text: oklch(92% 0 0);
     --text-muted: oklch(63% 0.018 var(--hue));
     --bg: oklch(21% 0 0);
     --bg-translucent: oklch(21% 0 0/90%);
     --bg-lines: oklch(30% 0 0);
     --bg-alt: oklch(25% 0 0);
     --border: oklch(41% 0 0);
-    --accent: oklch(77% 0.17 var(--hue));
+    --accent: oklch(75% 0.17 var(--hue));
 }
 
 /* =========================================
