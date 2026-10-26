@@ -2,7 +2,7 @@
 //Header.astro
 import ThemeToggle from '@/components/base/ThemeToggle.astro';
 
-const current = Astro.url.pathname;
+const current = Astro.url.pathname.replace(/\/$/, '') || '/';
 const isActive = (path: string) => current === path;
 ---
 
