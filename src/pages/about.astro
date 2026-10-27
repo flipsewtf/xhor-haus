@@ -12,7 +12,7 @@ const pageDescription = `Bio of Flipse`;
     <article class="prose flow">
         <p>
             <b>Just kidding, there's nothing nonchalant about me.</b>{' '}
-            A late-30s nerd of music and [insert current obsession]. Disability retired, but occasionally
+            A 38-year-old nerd of music and [insert current obsession]. Disability retired, but occasionally
             doing NASA's{' '}
             <ExternalLink href="https://science.nasa.gov/citizen-science/" label="homework" /> and picking
             fights with quantum physics just for kicks. I will recite the entire script of the 1998 hit
@@ -42,6 +42,13 @@ const pageDescription = `Bio of Flipse`;
             />, left that behind. I am now here. Back to carving my own corner, my own <em>haus</em
             > on the big web.
         </p>
+
+        <div class="buttons">
+            <div class="sr-only">88x31px badges</div>
+            <img src="/assets/images/button01.png" alt="Made by a human!" />
+            <img src="/assets/images/button02.png" alt="This Machine KILLS FASCISTS" />
+            <img src="/assets/images/button03.jpeg" alt="I break for Elves! (Legolas pictured)" />
+        </div>
     </article>
 </BaseLayout>
 
@@ -49,5 +56,10 @@ const pageDescription = `Bio of Flipse`;
     dfn {
         font-style: normal;
         cursor: help;
+    }
+    .buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-sm);
     }
 </style>
