@@ -8,6 +8,7 @@ section.blog-month-group {
         margin-block: var(--space-xl);
         font-size: var(--text-sm);
         font-weight: 500;
+        color: var(--text-muted);
     }
     ul.blog-list {
         display: flex;
@@ -16,7 +17,6 @@ section.blog-month-group {
     }
 
     p {
-        color: var(--text-muted);
         margin-top: var(--space-4px);
     }
 }
@@ -25,7 +25,6 @@ article.post {
 
     h1#post-title {
         margin-block-end: var(--space-md);
-        text-transform: lowercase;
     }
 
     /* IMAGES */
