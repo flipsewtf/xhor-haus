@@ -83,7 +83,7 @@
     --transition-ease: 0.25s cubic-bezier(0, 0, 0, 0.63);
     /* ----- LAYOUT */
     --layout-max: 48rem;
-    --layout-content: 37rem;
+    --layout-content: 37.5rem;
     --page-pad-y: clamp(3rem, 8vw, 6rem);
     --page-pad-x: clamp(1.25rem, 5vw, 3rem);
     --offset-margin-img: calc(-1 * var(--page-pad-x));

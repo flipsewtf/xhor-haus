@@ -2,18 +2,36 @@
 //index.astro
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Connect from '@/components/other/Connect.astro';
+import Scrobble from '@/components/other/Scrobble.astro';
 
 const pageTitle = ``;
 ---
 
-<BaseLayout hasOwnTitle={false} pageTitle={pageTitle} mainClass="homepage">
-    <h1 class="sr-only">Welcome</h1>
+<BaseLayout hasOwnTitle={true} pageTitle={pageTitle} mainClass="homepage">
     <article class="prose flow">
+        <h1>Welll, hi!</h1>
         <p>
-            Well, Hi and welcome in! This is my little corner of the internet. I don't know what
-            this will be yet, but I'm a little excited.
+            I'm Flipse, and his is my little corner of the internet. I don't know what this will be
+            yet, but I'm a little excited.
         </p>
     </article>
 
+    <Scrobble />
+
     <Connect />
 </BaseLayout>
+<style>
+    h1 {
+        font-size: inherit;
+        font-stretch: 100%;
+        margin-block-end: inherit;
+        display: inline;
+        line-height: inherit;
+        text-wrap: balance;
+        font-weight: inherit;
+        margin-inline-end: var(--space-xs);
+    }
+    h1 + p {
+        display: inline;
+    }
+</style>

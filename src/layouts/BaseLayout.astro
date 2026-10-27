@@ -30,7 +30,6 @@ const {
         <div class="shell">
             <Header />
             <main class:list={[mainClass]}>
-                <!-- <aside class="sb sb-left"><SidebarLeft /></aside> -->
                 <section class="main-content" transition:animate="fade">
                     {!hasOwnTitle && pageTitle && <h1>{pageTitle}</h1>}
                     <slot />
