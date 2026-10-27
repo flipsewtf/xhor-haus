@@ -95,7 +95,7 @@ article.post {
     ul.tags a {
         border: var(--space-1px) solid var(--border);
         display: inline-flex;
-        padding: var(--space-4px) var(--space-xs);
+        padding: calc(var(--space-sm) / 2) var(--space-sm);
         border-radius: var(--radius-full);
         background-color: var(--bg-alt);
     }
@@ -103,12 +103,18 @@ article.post {
         border-color: var(--accent-muted);
     }
 
-    /* FLOW */
-
-    :where(* + *):not(dialog, dialog *, figure, .tags, .tags *) {
-        margin-block-start: var(--flow-space);
+    hr.post-divider {
+        margin-block-start: var(--space-lg);
     }
 
+    /* FLOW */
+
+    :where(* + *):not(dialog, dialog *, figure, .tags, .tags *, hr) {
+        margin-block-start: var(--flow-space);
+    }
+    hr {
+        margin-block: var(--space-2xl);
+    }
     ul ul,
     ol ol {
         margin-block: var(--flow-space);
