@@ -1,6 +1,11 @@
 ---
 //connect.astro
-import { IconBrandBluesky, IconBrandThreads, IconBrandDiscord } from '@tabler/icons-astro';
+import {
+    IconBrandBluesky,
+    IconBrandThreads,
+    IconBrandDiscord,
+    IconDisc,
+} from '@tabler/icons-astro';
 ---
 
 <section class="connect">
@@ -34,6 +39,15 @@ import { IconBrandBluesky, IconBrandThreads, IconBrandDiscord } from '@tabler/ic
                     <IconBrandDiscord aria-hidden="true" /> Discord
                 </a>
             </li>
+            <li>
+                <a
+                    href="https://record.club/mournstera"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Record.club (opens in a new tab)">
+                    <IconDisc aria-hidden="true" /> Record.Club
+                </a>
+            </li>
         </ul>
     </nav>
 </section>
@@ -42,11 +56,11 @@ import { IconBrandBluesky, IconBrandThreads, IconBrandDiscord } from '@tabler/ic
         margin-block-start: var(--space-2xl);
     }
     h2 {
-        margin-block-end: var(--space-lg);
+        margin-block-end: var(--space-md);
     }
     nav.socials ul {
         display: inline-flex;
-        gap: var(--space-lg);
+        gap: var(--space-sm) var(--space-lg);
 
         flex-wrap: wrap;
     }
