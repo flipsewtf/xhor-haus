@@ -279,6 +279,7 @@ h4 {
     line-height: var(--leading-heading);
     text-wrap: balance;
     font-weight: 550;
+    letter-spacing: 0;
 }
 
 h1 {

@@ -14,16 +14,16 @@ const isActive = (path: string) => current === path;
     <nav class="main" aria-label="Main links">
         <ul>
             <li>
-                <a href="/" aria-current={isActive('/') ? 'page' : undefined}>Home</a>
-            </li>
-            <li>
-                <a href="/about" aria-current={isActive('/about') ? 'page' : undefined}>About</a>
+                <a href="/now" aria-current={isActive('/now') ? 'page' : undefined}>Now</a>
             </li>
             <li>
                 <a href="/weblog" aria-current={isActive('/weblog') ? 'page' : undefined}>Log</a>
             </li>
             <li>
-                <a href="/now" aria-current={isActive('/now') ? 'page' : undefined}>Now</a>
+                <a href="/about" aria-current={isActive('/about') ? 'page' : undefined}>About</a>
+            </li>
+            <li>
+                <a href="/uses" aria-current={isActive('/uses') ? 'page' : undefined}>Uses</a>
             </li>
         </ul>
     </nav>
@@ -88,10 +88,15 @@ const isActive = (path: string) => current === path;
         header {
             grid-template-areas: 'home links theme' 'desc desc desc';
             grid-template-columns: auto 1fr auto;
+            gap: 0;
+        }
+
+        nav.main ul {
+            justify-content: flex-end;
         }
 
         :global(button.theme-toggle) {
-            margin-inline-start: var(--space-md);
+            margin-inline-start: var(--space-lg);
         }
     }
 </style>
