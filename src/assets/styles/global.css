@@ -72,7 +72,7 @@
     --text-lg: 1.125rem;
     --text-xl: 1.25rem;
     --text-xxl: 1.5rem;
-    --text-h1: clamp(2rem, 6vw, 2.375rem);
+    --text-h1: clamp(2.25rem, 6vw, 2.75rem);
     /* ----- LINE-HEIGHT */
     --leading-p: 1.75;
     --leading-sub: 1.4;
@@ -82,15 +82,15 @@
     --transition-smooth: 0.12s cubic-bezier(0.25, 0.8, 0.3, 1);
     --transition-ease: 0.25s cubic-bezier(0, 0, 0, 0.63);
     /* ----- LAYOUT */
-    --layout-max: 48rem;
-    --layout-content: 37.5rem;
+    --layout-max: 46rem;
     --page-pad-y: clamp(3rem, 8vw, 6rem);
     --page-pad-x: clamp(1.25rem, 5vw, 3rem);
     --offset-margin-img: calc(-1 * var(--page-pad-x));
     --hue: 32;
 }
-@media (min-width: 48rem) {
+@media (min-width: 46rem) {
     :root {
+        --layout-content: 36.25rem;
         --radius-img: var(--radius-md);
         --offset-margin-img: 0;
         --img-border-radius: var(--radius-sm);
@@ -200,6 +200,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-wrap: break-word;
+    letter-spacing: 0.0125rem;
     line-height: 1;
     min-height: 100vh;
 }
@@ -299,7 +300,6 @@ h4 {
 
 p {
     line-height: var(--leading-p);
-    letter-spacing: 0.009375rem;
 }
 
 .flow > * + * {
