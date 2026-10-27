@@ -14,6 +14,9 @@ const isActive = (path: string) => current === path;
     <nav class="main" aria-label="Main links">
         <ul>
             <li>
+                <a href="/" aria-current={isActive('/') ? 'page' : undefined}>Home</a>
+            </li>
+            <li>
                 <a href="/about" aria-current={isActive('/about') ? 'page' : undefined}>About</a>
             </li>
             <li>
