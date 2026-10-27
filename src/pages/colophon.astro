@@ -10,16 +10,16 @@ const pageTitle = `Colophon`;
     <article class="flow page">
         <h2>Xhor.haus</h2>
         <p>
-            The domain and its TLD are a funny use of the word <em>Xhorhaus</em>, the house granted
-            to The Mighty Nein in Campaign 2 of Critical Role. This is my nerdy place on the
-            internet. I hope I do 'em proud.
+            The domain and its TLD are simply a funny use of the word <em>Xhorhaus</em>, the house
+            granted to The Mighty Nein in Campaign 2 of Critical Role. This is my nerdy place on
+            the internet. I hope I do 'em proud!
         </p>
 
         <h2>Design &amp; Build</h2>
 
         <p>
             This site is built with Astro, served as static files via Cloudflare, with the source
-            hosted on GitHub.
+            hosted publically on GitHub.
         </p>
         <p>
             This is a personal project, archiving and going back to owning my content like in the
@@ -30,51 +30,61 @@ const pageTitle = `Colophon`;
 
         <h2>Policy</h2>
         <p>
-            No personal data, no cookies. The only analytics are Cloudflare's basic traffic
-            metrics, and honestly I couldn't care less about those.
+            No personal data, no cookies. The only thing stored in your browser is your theme
+            choice (light, dark or system), kept in local storage so the site remembers it. It
+            never leaves your device. The only analytics are Cloudflare's basic traffic metrics,
+            and honestly I couldn't care less about those.
         </p>
 
         <h2>Credits</h2>
 
         <p>
-            <ExternalLink
-                href="https://piccalil.li/blog/my-favourite-3-lines-of-css/"
-                label="piccalil.li"
-            /> saved my flow margin-ass. I'm building a list of links tba asap!
+            Helpful links that made a difference to my site. Not complete, will be adding links
+            ASAP.
         </p>
+
+        <ul>
+            <li>
+                <ExternalLink
+                    href="https://piccalil.li/blog/my-favourite-3-lines-of-css/"
+                    label="piccalil.li"
+                /><em class="credit-desc">My favourite 3 lines of CSS </em>
+            </li>
+            <li>
+                <ExternalLink
+                    href="https://www.joshwcomeau.com/css/surprising-truth-about-pixels-and-accessibility/"
+                    label="joshwcomeau.com"
+                /><em class="credit-desc">The Surprising Truth About Pixels and Accessibility</em>
+            </li>
+        </ul>
     </article>
 </BaseLayout>
 
 <style>
-    article:not(:last-of-type) {
-        margin-bottom: var(--space-2xl);
+    ul {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-md);
+        padding-left: var(--space-xl);
     }
-    .definition {
-        border-block: var(--space-1px) solid var(--bg-lines);
-        padding: var(--space-lg);
-        margin-inline: var(--space-1px);
+    li {
+        padding-left: var(--space-sm);
+        line-height: var(--leading-sub);
+    }
 
-        dd {
-            padding-left: var(--space-sm);
-        }
+    li::marker {
+        color: var(--text-muted);
+        content: '— ';
+        transition: color var(--transition-smooth);
+    }
 
-        h2 {
-            font-family: var(--font-family--mono);
-        }
+    li:hover::marker {
+        color: var(--text);
+    }
 
-        .pronunciation {
-            display: block;
-            font-family: var(--font-family--mono);
-            font-size: var(--text-xs);
-            color: var(--text);
-
-            &.simple {
-                font-style: italic;
-            }
-        }
-
-        .definition-description {
-            display: block;
-        }
+    em.credit-desc::before {
+        content: '—';
+        display: inline;
+        margin-inline: var(--space-xs);
     }
 </style>
